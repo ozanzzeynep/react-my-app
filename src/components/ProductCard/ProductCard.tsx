@@ -12,10 +12,14 @@ type Props = {
 
 const ProductCard = (props: Props) => {
   const deleteProduct = async () => {
-    let response = await ProductService.delete(props.product.id);
-    if (response.status == HttpStatusCode.Ok) {
-      props.onDelete(props.product.id);
-      alert("Veri başarıyla silindi");
+    try {
+      let response = await ProductService.delete(props.product.id);
+      if (response.status == HttpStatusCode.Ok) {
+        props.onDelete(props.product.id);
+        alert("Veri başarıyla silindi");
+      }
+    } catch (e) {
+      alert("Veri silinemedi");
     }
   };
 
